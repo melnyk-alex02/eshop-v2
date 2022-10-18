@@ -3,12 +3,12 @@ package com.alex.eshop.eshop.Service;
 import com.alex.eshop.eshop.Entity.Item;
 import com.alex.eshop.eshop.Exception.DataNotFound;
 import com.alex.eshop.eshop.Repository.ItemRepository;
-
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.List;
 
 @Service
 @Transactional
@@ -21,12 +21,12 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public Item getItemWithCategoryInfo(Long id) {
-        return itemRepository.findById(id).orElseThrow(()->new DataNotFound("There is no item with id " + id));
+        return itemRepository.findById(id).orElseThrow(() -> new DataNotFound("There is no item with id " + id));
     }
 
     @Override
     public List<Item> getLastFiveItems() {
-        return itemRepository.findAll(PageRequest.of(0,5, Sort.Direction.DESC, "id")).getContent();
+        return itemRepository.findAll(PageRequest.of(0, 5, Sort.Direction.DESC, "id")).getContent();
     }
 
     @Override
